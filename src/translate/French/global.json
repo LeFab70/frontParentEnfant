@@ -1,0 +1,9 @@
+{
+  "login": {
+    "pseudo": "Nom du compte",
+    "password": "Mot de passe du compte",
+    "btnconnect": "Se Connecter",
+    "forgetPasse": "Mot de passe oublie",
+    "messageWelcome": "BIENVENU DANS VOTRE PLATEFORME DE GESTION DES MEMBRES"
+  }
+}

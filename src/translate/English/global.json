@@ -1,0 +1,9 @@
+{
+  "login": {
+    "pseudo": "Account name",
+    "password": "Account Password",
+    "btnconnect": "log in",
+    "forgetPasse": "Forgot your password",
+    "messageWelcome": "WELCOME TO YOUR MEMBER MANAGEMENT PLATFORM"
+  }
+}

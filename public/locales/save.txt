@@ -1,0 +1,313 @@
+ <form
+          
+          className="w-full space-y-2  text-base text-center flex flex-col  "
+        >
+          <div className=" flex  text-2xl items-center space-x-2">
+            <label htmlFor="cardMember" ></label>
+            <input
+              type="number"
+              id="cardMember"
+             
+              
+              placeholder="Numero de carte du membre"
+              className="  placeholder-gray-400 placeholder:italic ml-2 px-4 text-xl bg-gray-200 border border-transparent h-6 w-2/6 form-control block  py-6  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              {...register("cardMember")}
+            />
+            {/* errors will return when field validation fails  */}
+            {errors.cardMember && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.cardMember.message}
+              </span>
+            )}
+          </div>
+
+          <div className=" flex  text-xl items-center space-x-2">
+            <label
+              htmlFor="Type_de_famille"
+              className=" items-center flex justify-around ml-2 text-xl bg-gray-200 border border-transparent h-16 w-3/6 form-control px-2 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+            >
+              <span className="block ">Type de famille</span>
+              <select
+                id="Type_de_famille"
+                {...register("typeOfFamily")}
+                className=" mx-1 w-2/3 bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+              >
+                <optgroup label="Type_de_famille">
+                  <option value="Nucleaire">Nucléaire</option>
+                  <option value="Recomposee">Recomposée</option>
+
+                  <option value="Monoparentale_mere">
+                    Monoparentale (mère)
+                  </option>
+                  <option value="Monoparentale_pere">
+                    Monoparentale (père)
+                  </option>
+                  <option value="Homoparentale_mere">
+                    Homoparentale (mère)
+                  </option>
+                  <option value="Homoparentale_pere">
+                    Homoparentale (père)
+                  </option>
+                </optgroup>
+              </select>
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.typeOfFamily && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.typeOfFamily.message}
+              </span>
+            )}
+
+            <label
+              htmlFor="familyIncome"
+              className=" items-center flex justify-around ml-2 text-xl bg-gray-200 border border-transparent h-16 w-3/6 form-control px-2 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+            >
+              <span className="block ">Revenu familial</span>
+              <select
+                id="familyIncome"
+                {...register("familyIncome")}
+                className=" mx-1 w-2/3 bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+              >
+                <optgroup label="familyIncome">
+                  <option value="0"> $0- $9 999</option>
+                  <option value="10000"> $10 000- $19 999</option>
+
+                  <option value="20000">$20 000- $29 999</option>
+                  <option value="30000">$30 000- $39 999</option>
+                  <option value="40000">$40 000- $49 999</option>
+                  <option value="50000">$50 000- $100 000</option>
+                </optgroup>
+              </select>
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.familyIncome && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.familyIncome.message}
+              </span>
+            )}
+          </div>
+
+          <div className="py-1  ml-2  flex px-1 text-xl items-center space-x-1 border-2 border-sky-900 rounded-lg">
+            <label
+              htmlFor="numberOfChildHouse"
+              className=" items-center flex justify-around  text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+            >
+              <span className="block uppercase text-base ">
+                Nombre Enfants a la maison
+              </span>
+              <input
+                type="number"
+                id="numberOfChildHouse"
+                className="w-[15%] text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                {...register("numberOfChildHouse")}
+              />
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.numberOfChildHouse && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.numberOfChildHouse.message}
+              </span>
+            )}
+
+            <label
+              htmlFor="numberOfChildCarrefour"
+              className=" items-center flex justify-around  text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+            >
+              <span className="block uppercase text-base ">
+                Nombre Enfants a carrefour
+              </span>
+              <input
+                type="number"
+                id="numberOfChildCarrefour"
+                className="w-[15%] text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                {...register("numberOfChildCarrefour")}
+              />
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.numberOfChildCarrefour && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.numberOfChildCarrefour.message}
+              </span>
+            )}
+
+            <label
+              htmlFor="numberOfAdult"
+              className=" items-center flex justify-around  text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+            >
+              <span className="block uppercase text-base ">
+                Nombre d'adultes
+              </span>
+              <input
+                type="number"
+                id="numberOfAdult"
+                className="w-[15%] text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                {...register("numberOfAdult")}
+              />
+            </label>
+            {/* errors will return when field validation fails  */}
+            {errors.numberOfAdult && (
+              <span className="text-red-500 text-base font-bold  block">
+                {errors.numberOfAdult.message}
+              </span>
+            )}
+          </div>
+
+          <div className="py-2 ml-2 border  border-red-900 shadow-lg shadow-gray-200 rounded-lg flex flex-col px-1 mt-10 text-xl items-center space-x-1">
+            <span className="uppercase block text-red-600 font-bold">
+              Personne a contacter en urgence
+            </span>
+            <div className="py-2 flex  px-1 mt-2 text-xl items-center space-x-1 border-2 border-sky-900 rounded-lg">
+              <label
+                htmlFor="fnameUrgency"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">Prenom</span>
+                <input
+                  type="text"
+                  id="fnameUrgency"
+                  className="w-[75%] ml-2 text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("fnameUrgency")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.fnameUrgency && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.fnameUrgency.message}
+                </span>
+              )}
+
+              <label
+                htmlFor="lnameUrgency"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">Nom</span>
+                <input
+                  type="text"
+                  id="lnameUrgency"
+                  className="w-[75%] ml-2 text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("lnameUrgency")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.lnameUrgency && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.lnameUrgency.message}
+                </span>
+              )}
+              <label
+                htmlFor="emailUrgency"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">Email</span>
+                <input
+                  type="email"
+                  id="emailUrgency"
+                  className=" px-1 w-[80%] ml-2 text-base bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("emailUrgency")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.emailUrgency && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.emailUrgency.message}
+                </span>
+              )}
+
+              <label
+                htmlFor="phoneUrgency"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">Telephone</span>
+                <input
+                  type="text"
+                  id="phoneUrgency"
+                  className=" px-1 w-[80%] ml-2 text-base bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("phoneUrgency")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.phoneUrgency && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.phoneUrgency.message}
+                </span>
+              )}
+
+              <label
+                htmlFor="lienUrgency"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-1/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">lien</span>
+                <input
+                  type="text"
+                  id="lienUrgency"
+                  className=" px-1 w-[80%] ml-2 text-base bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("lienUrgency")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.lienUrgency && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.lienUrgency.message}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="py-2 ml-2 border-2   border-green-900 shadow-2xl shadow-green-50 bg-green-50 rounded-lg flex flex-col px-1 mt-10 text-xl items-center space-x-1">
+            <span className="uppercase block text-green-700 font-bold">
+              Remarques
+            </span>
+            <div className="py-2 flex  justify-between px-1 mt-2 text-xl items-center space-x-1  rounded-lg">
+              <label
+                htmlFor="remarks"
+                className=" items-center flex   text-xl bg-gray-200 border border-transparent h-16 w-2/3 form-control px-1 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block uppercase text-base ">Remarques</span>
+                <input
+                  type="text"
+                  id="remarks"
+                  className="w-[90%] ml-2 text-center bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                  {...register("remarks")}
+                />
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.remarks && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.remarks.message}
+                </span>
+              )}
+
+              <label
+                htmlFor="howKnowUs"
+                className=" items-center flex justify-around ml-2 text-xl bg-gray-200 border border-transparent h-16 w-4/5 form-control px-2 mb-1  py-2  font-normal text-gray-700 bg-clip-padding    rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-blue-600 focus:outline-none"
+              >
+                <span className="block text-base ">
+                  Comment avez-vous entendu parler de nous?
+                </span>
+                <select
+                  id="howKnowUs"
+                  {...register("howKnowUs")}
+                  className=" uppercase mx-1 w-2/3 bg-gray-50 border-2 border-sky-900 rounded-lg h-10  "
+                >
+                  <optgroup label="howKnowUs">
+                    <option value="ami"> Famille ou ami</option>
+                    <option value="Ecole"> Ecole du quartier</option>
+                    <option value="site">site web</option>
+                    <option value="facebook">facebook</option>
+                    <option value="autres">autres medias sociaux</option>
+                    <option value="vitrine">Vitrine clsc</option>
+                    <option value="journal">journal du quartier</option>
+                    <option value="reference">reference</option>
+                    <option value="rue">en passant dans la rue</option>
+                  </optgroup>
+                </select>
+              </label>
+              {/* errors will return when field validation fails  */}
+              {errors.howKnowUs && (
+                <span className="text-red-500 text-base font-bold  block">
+                  {errors.howKnowUs.message}
+                </span>
+              )}
+            </div>
+          </div>
+        </form>
