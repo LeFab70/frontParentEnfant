@@ -393,7 +393,7 @@ const AddChild = () => {
   };
 
   const [numberOfCard, setNumberOfCard] = React.useState("");
-  console.log(numberOfCard);
+  //console.log(numberOfCard);
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(addMember({ [name]: value }));

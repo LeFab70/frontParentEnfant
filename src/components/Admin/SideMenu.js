@@ -135,12 +135,12 @@ const SideMenu = () => {
                     </li> */}
                   <li className="rounded-sm">
                     <Link
-                      to="users/edit"
+                      to="statistique/show"
                       rel="noopener noreferrer"
-                      className=" transition ease-in-out duration-200 hover:bg-sky-700 cursor-pointer flex items-center p-2 space-x-3 rounded-md"
+                      className=" transition ease-in-out duration-200 hover:bg-sky-700 cursor-pointer flex items-center p-1 space-x-3 rounded-md"
                     >
                       <AiOutlineUsergroupAdd />
-                      <span>Statistiques diverses</span>
+                      <span>Statistiques|Email</span>
                     </Link>
                   </li>
                 </ul>

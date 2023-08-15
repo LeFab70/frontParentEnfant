@@ -14,6 +14,20 @@ export const getMember = async () => {
   return data;
 };
 
+export const getHasMember = async () => {
+  const { data } = await Axios.get("/hasMember")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.message;
+    });
+  // fetch("http://localhost:3200/volets");
+  //console.log("------0");
+  //console.log(data)
+  return data;
+};
+
 //create les members
 export const addMemberPut = async (post) => {
   const postData = await Axios.put("/membres", post)

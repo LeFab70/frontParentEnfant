@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
-import { getMember } from "../../services/Member.Service";
+import { getHasMember, getMember } from "../../services/Member.Service";
 import { GrDocumentUser } from "react-icons/gr";
 import { MdFamilyRestroom, MdChildCare } from "react-icons/md";
 import {
@@ -12,45 +12,71 @@ import {
   Cell,
   //ResponsiveContainer,
 } from "recharts";
+import { getPeriods } from "../../services/Period.Service";
+///import { getVolets } from "../../services/Volet.Service";
 //import members from "../../stores/members";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#3E0F0A",
-  "#FF8042",
-  "#0A28FE",
-  "#C0049F",
+  "#f9FE",
+  "#a49F",
+  "#1a0A",
+  "#23fa",
+  "#Ea2f",
+  "black",
+  "red",
+  "teal",
 ];
 
-const COLORS2 = ["#0A28FE", "#C0049F", "#BCB428", "#34B3042", "#FF8042"];
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+const COLORS2 = ["#28FE", "#C49F", "#B428", "#3042", "#042"];
+//const RADIAN = Math.PI / 180;
+//  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+//  }) => {
+//   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+//   const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
+//   const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+//   const value = data[index].value;
+//   const percentage = `${((value / total) * 100).toFixed(2)}%`;
 
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      fontWeight={"bold"}
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+//   return (
+//     <text
+//       x={x}
+//       y={y}
+//       fill="black"
+//       textAnchor="middle"
+//       dominantBaseline="central"
+//     >
+//       {`${percentage} (${value})`}
+//     </text>)
+
+// }
+
+//({
+//   cx,
+//   cy,
+//   midAngle,
+//   innerRadius,
+//   outerRadius,
+//   percent,
+//   index,
+// }) => {
+//   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+//   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+//   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+//   return (
+//     <text
+//       x={x}
+//       y={y}
+//       fill="white"
+//       fontWeight={"bold"}
+//       textAnchor={x > cx ? "start" : "end"}
+//       dominantBaseline="central"
+//     >
+//       {`${(percent * 100).toFixed(0)}%`}
+//     </text>
+//   );
+// };
+
 // ChartJS.register(
 //   CategoryScale,
 //   LinearScale,
@@ -93,16 +119,26 @@ const renderCustomizedLabel = ({
 //   },
 // };
 const ChartHome = () => {
+  const allPeriods = useQuery("periods", getPeriods);
+  const idValidePeriod = allPeriods.data?.filter(
+    (period) => period.close === null
+  )[0].Id_period;
   const { data } = useQuery("members", getMember);
   // const queryClient = useQueryClient();
   const [members, setMembers] = React.useState(
-    data?.filter((member) => member.id_parent=== null && member.id_conjoint === null)
+    data?.filter(
+      (member) => member.id_parent === null && member.id_conjoint === null
+    )
   );
   const [child, setChild] = React.useState(
     data?.filter((member) => member.id_parent !== null)
   );
   React.useEffect(() => {
-    setMembers(data?.filter((member) => member.id_parent=== null && member.id_conjoint === null));
+    setMembers(
+      data?.filter(
+        (member) => member.id_parent === null && member.id_conjoint === null
+      )
+    );
     setChild(data?.filter((member) => member.id_parent !== null));
   }, [data]);
   //data?.map((dat) => console.log(dat?.id_parent?.length));
@@ -110,9 +146,14 @@ const ChartHome = () => {
     const value = members?.filter(
       (member) => member.group_of_age === age
     ).length;
-    console.log(value);
+    // console.log(value);
     return value;
   };
+
+  /* verifier le cas de la periode
+
+8=********************************** sur les stat precedent
+*/
 
   // const wait = (duration = 1000) => {
   //   return new Promise((resolve) => {
@@ -121,7 +162,8 @@ const ChartHome = () => {
   // };
   // console.log(members);
 
-  const data02 = [
+  //a revoir suivant l'id de la periode active et refactorine
+  const dataList = [
     { name: "Group 0-19", value: numberOfMembersWithAge("0-19") },
     { name: "Group 20-24", value: numberOfMembersWithAge("20-24") },
     { name: "Group 25-29", value: numberOfMembersWithAge("25-29") },
@@ -131,13 +173,110 @@ const ChartHome = () => {
     { name: "Group 45-54", value: numberOfMembersWithAge("45-54") },
     { name: "Group 55+", value: numberOfMembersWithAge("55+") },
   ];
-  const data01 = [
-    { name: "BKG", value: 1 },
-    { name: "PETITE ECOLES", value: 1 },
-    { name: "COPAINS-COPINES", value: 1 },
-    { name: "ENTR'ADOS", value: 1 },
-    { name: "ADULTES", value: 1 },
+  const data02 = [];
+
+  for (let data of dataList) {
+    if (data.value !== 0) data02.push(data);
+  }
+  const data01 = [];
+  //const queryClient = useQuery("volets", getVolets);
+  const dataListVolet = useQuery("voletsList", getHasMember);
+  //console.table(dataListVolet.data); , {
+  //   refetchIntervalInBackground: 60000,
+  // }
+  //const voletsList = dataListVolet.data ? dataListVolet.data : [];
+  // console.table(
+  //   voletsList
+  //   //dataListVolet.data?.filter((volets) => idValidePeriod === volets?.Id_period)
+  // );
+  const [listVolets, setListVolets] = React.useState([]);
+
+  // const listVolets = dataListVolet.data
+  //   ? [
+  //       ...dataListVolet.data.filter(
+  //         (volets) => idValidePeriod === volets?.Id_period
+  //       ),
+  //     ]
+  //   : [];
+
+  useEffect(() => {
+    setListVolets(
+      dataListVolet.data
+        ? [
+            ...dataListVolet.data.filter(
+              (volets) => idValidePeriod === volets?.Id_period
+            ),
+          ]
+        : []
+    );
+  }, [dataListVolet.data, idValidePeriod]);
+  //console.log(listVolets);
+  const nameVolets = [];
+  const numberOfMembersWithVolet = () => {
+    for (let volet of listVolets) {
+      // console.log(volet.Volet?.label_volet);
+      // const voletFound = {
+      //   name: volet.Volet?.label_volet ? volet.Volet?.label_volet : "",
+      //   value: listVolets?.filter(
+      //     (voletu) => voletu.Volet?.label_volet === this.name
+      //   ).length,
+      // };
+      // if (volet.Volet?.label_volet1 !== undefined)
+      nameVolets.push(volet.Volet?.label_volet);
+    }
+    //console.log(value);
+    //return value;
+  };
+
+  numberOfMembersWithVolet();
+
+  const grouped = [
+    nameVolets.reduce((result, current) => {
+      //console.log(current)
+      if (current !== undefined)
+        if (!result[current]) {
+          result[current] = 1;
+        } else {
+          result[current]++;
+        }
+      //console.log(result);
+      return result;
+    }, {}),
   ];
+
+  grouped.forEach((obj) => {
+    for (const prop in obj) {
+      //console.log(prop, obj[prop]);
+      data01.push({ name: prop, value: obj[prop] });
+    }
+  });
+  const total = data01.reduce((sum, entry) => sum + entry.value, 0);
+  const total2 = data02.reduce((sum, entry) => sum + entry.value, 0);
+
+  //console.log(grouped);
+  // for (let volet of grouped) {
+  //   console.log(volet)
+  //   // data01.push({
+  //   //   name: grouped[0],
+  //   //   value: grouped,
+  //   // });
+  // }
+  //console.log(nameVolets);
+  // for (let volet of nameVolets) {
+  //   //const element = volet;
+  //   // console.log(nameVolets.filter((v) => v === volet))
+  //   if (volet !== undefined)
+  //     data01.push({
+  //       name: "volet",
+  //       value: nameVolets.filter((v) => v === volet).length,
+  //     });
+  //   // { name: "BKG", value: 1 },
+  //   // { name: "PETITE ECOLES", value: 1 },
+  //   // { name: "COPAINS-COPINES", value: 1 },
+  //   // { name: "ENTR'ADOS", value: 1 },
+  //   // { name: "ADULTES", value: 1 },
+  // }
+
   return (
     <div className="h-full">
       <div className="mt-2 flex items-center flex-wrap gap-1 justify-center pb-4 space-y-2 md:space-y-1 ">
@@ -310,12 +449,39 @@ const ChartHome = () => {
                 cy="50%"
                 labelLine={true}
                 legendType="triangle"
-                label
-                outerRadius={120}
+                label={({
+                  cx,
+                  cy,
+                  midAngle,
+                  innerRadius,
+                  outerRadius,
+                  percent,
+                  index,
+                }) => {
+                  const radius =
+                    innerRadius + (outerRadius - innerRadius) * 0.5;
+                  const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
+                  const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+                  const value = data02[index].value;
+                  const percentage = `${((value / total2) * 100).toFixed()}%`;
+
+                  return (
+                    <text
+                      x={x}
+                      y={y}
+                      fill="black"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                    >
+                      {`${percentage} (${value})`}
+                    </text>
+                  );
+                }}
+                outerRadius={140}
                 fill="#8884d8"
                 dataKey="value"
-                innerRadius={1}
-                paddingAngle={2}
+                innerRadius={4}
+                paddingAngle={10}
               >
                 {data02.map((entry, index) => (
                   <Cell
@@ -342,12 +508,38 @@ const ChartHome = () => {
               cy="50%"
               labelLine={true}
               legendType="circle"
-              label={renderCustomizedLabel}
-              outerRadius={120}
+              label={({
+                cx,
+                cy,
+                midAngle,
+                innerRadius,
+                outerRadius,
+                percent,
+                index,
+              }) => {
+                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
+                const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
+                const value = data01[index].value;
+                const percentage = `${((value / total) * 100).toFixed()}%`;
+
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    fill="black"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                  >
+                    {`${percentage} (${value})`}
+                  </text>
+                );
+              }}
+              outerRadius={130}
               fill="#8884d8"
               dataKey="value"
               innerRadius={1}
-              paddingAngle={2}
+              paddingAngle={5}
             >
               {data02.map((entry, index) => (
                 <Cell
