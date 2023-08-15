@@ -30,6 +30,7 @@ const EditVolet = () => {
             {" "}
             / Gestion des periodes
           </h2>
+          {/* {console.log("periode")} */}
           <Periode />
         </TabPanel>
         <TabPanel>

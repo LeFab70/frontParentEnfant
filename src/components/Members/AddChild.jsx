@@ -27,7 +27,7 @@ const AddChild = () => {
 
   const allPeriods = useQuery("periods", getPeriods);
   const idValidePeriod = allPeriods.data?.filter(
-    (period) => period.close === "oui"
+    (period) => period.close === null
   )[0].Id_period;
 
   useQuery("members", getMember);
@@ -693,7 +693,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose sex--</option>
 
-                    <option value="M" selected>
+                    <option value="M">
                       {" "}
                       M
                     </option>
@@ -720,7 +720,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="non" selected>
+                    <option value="non" >
                       {" "}
                       non
                     </option>
@@ -835,7 +835,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="oui" selected>
+                    <option value="oui">
                       {" "}
                       oui
                     </option>
@@ -862,7 +862,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="non" selected>
+                    <option value="non">
                       {" "}
                       non
                     </option>
@@ -891,7 +891,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="non" selected>
+                    <option value="non">
                       {" "}
                       non
                     </option>
@@ -919,7 +919,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="non" selected>
+                    <option value="non">
                       {" "}
                       non
                     </option>
@@ -947,7 +947,7 @@ const AddChild = () => {
                   >
                     <option value="">--Please choose--</option>
 
-                    <option value="non" selected>
+                    <option value="non">
                       {" "}
                       non
                     </option>

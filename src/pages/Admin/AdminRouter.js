@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Errors } from "../public/Index";
 import {EditVolet, Alayout, Dashboard, UsersAdd, UsersEdit, AddMember } from "./Index";
+import Periode from "../../components/Admin/Periode";
 
 const AdminRouter = (user) => {
   return (
@@ -20,6 +21,9 @@ const AdminRouter = (user) => {
 
         <Route path="volets">
           <Route path="edit" element={<EditVolet />} />
+        </Route>
+        <Route path="periode">
+          <Route path="add" element={<Periode />} />
         </Route>
         <Route path="*" element={<Errors />} />
       </Route>

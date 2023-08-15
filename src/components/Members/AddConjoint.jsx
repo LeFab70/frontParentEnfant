@@ -22,7 +22,7 @@ const AddConjoint = () => {
 
   const allPeriods = useQuery("periods", getPeriods);
   const idValidePeriod = allPeriods.data?.filter(
-    (period) => period.close === "oui"
+    (period) => period.close === null
   )[0].Id_period;
 
   useQuery("members", getMember);
@@ -637,7 +637,7 @@ const AddConjoint = () => {
                   >
                     <option value="">--Please choose sex--</option>
 
-                    <option value="M" selected>
+                    <option value="M">
                       {" "}
                       M
                     </option>
@@ -666,7 +666,7 @@ const AddConjoint = () => {
                     <option value="">--Please choose a language--</option>
                     {/* <optgroup label="Type de membre"> */}
                     {/* <option></option> */}
-                    <option value="francais" selected>
+                    <option value="francais">
                       {" "}
                       francais
                     </option>
@@ -693,7 +693,7 @@ const AddConjoint = () => {
                     onChange={handleChange}
                     name="group_of_age"
                     value={group_of_age || ""}
-                    defaultValue={group_of_age || ""}
+                  
                     className="invalid:text-xs invalid:text-gray-200 block  w-full uppercase peer px-4 pt-4
               border-b border-slate-600 placeholder-transparente shadow-sm text-gray-900"
                   >
@@ -703,7 +703,7 @@ const AddConjoint = () => {
                     <option value="20-24"> 20-24</option>
                     <option value="25-29"> 25-29</option>
                     <option value="30-34"> 30-34</option>
-                    <option value="35-39" selected>
+                    <option value="35-39">
                       {" "}
                       35-39
                     </option>

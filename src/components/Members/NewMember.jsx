@@ -13,11 +13,11 @@ import { getVolets } from "../../services/Volet.Service";
 import { getMember } from "../../services/Member.Service";
 import { getPeriods } from "../../services/Period.Service";
 const NewMember = () => {
-  const wait = (duration = 1000) => {
-    return new Promise((resolve) => {
-      window.setTimeout(resolve, duration);
-    });
-  };
+  // const wait = (duration = 1000) => {
+  //   return new Promise((resolve) => {
+  //     window.setTimeout(resolve, duration);
+  //   });
+  // };
 
   const queryClient = useQueryClient();
   //get volet
@@ -27,9 +27,11 @@ const NewMember = () => {
   const { data } = useQuery("volets", getVolets);
   const allPeriods = useQuery("periods", getPeriods);
   const idValidePeriod = allPeriods.data?.filter(
-    (period) => period.close === "oui"
+    (period) => period.close === null
   )[0].Id_period;
-  //console.log(allPeriods.data);
+  // console.table(allPeriods.data);
+  // console.log("periode");
+  // console.table(data);
   //console.log('idperiod')
   //console.log(idValidePeriod)
   //const [volets, setVolets] = React.useState([]);
@@ -160,7 +162,7 @@ const NewMember = () => {
       //expirationHealth,
       numberHealth,
       health_info,
-     // birthday_child,
+      // birthday_child,
       school_child,
       autorisationDivulguerInfo,
       autorisationDivulgationDoctor,
@@ -222,7 +224,7 @@ const NewMember = () => {
     //expirationHealth,
     numberHealth,
     health_info,
-   // birthday_child,
+    // birthday_child,
     school_child,
     autorisationDivulguerInfo,
     autorisationDivulgationDoctor,
@@ -282,7 +284,7 @@ const NewMember = () => {
         //expirationHealth: "",
         numberHealth: "",
         health_info: "",
-       // birthday_child: new Date().getDate(),
+        // birthday_child: new Date().getDate(),
         school_child: "",
         autorisationDivulguerInfo: "non",
         autorisationDivulgationDoctor: "non",
@@ -290,7 +292,7 @@ const NewMember = () => {
         id_intervenant: null, //ici id du membre qui est intervenant
 
         //data conjoint
-        id_conjoint:null, //ici id du membre qui est conjoint
+        id_conjoint: null, //ici id du membre qui est conjoint
 
         //pour la table hasmember
         Id_volet: null,
@@ -307,7 +309,7 @@ const NewMember = () => {
       // console.log(dataToSave);
       //return;
       if (dataToSave) {
-        await wait(2000);
+        //await wait(2000);
         const post = await mutatePost
           .mutateAsync(dataToSave)
           .then((res) => res)
@@ -388,9 +390,7 @@ const NewMember = () => {
                 <option value="">--Please choose an option--</option>
                 {/* <optgroup label="Type de membre"> */}
                 {/* <option></option> */}
-                <option value="famille" selected>
-                  Famille
-                </option>
+                <option value="famille">Famille</option>
                 <option value="Employe">Employe(e)</option>
                 <option value="benevoles">benevoles</option>
                 <option value="stagiaires">stagiaires</option>
@@ -590,10 +590,7 @@ const NewMember = () => {
                 >
                   <option value="">--Please choose sex--</option>
 
-                  <option value="M" selected>
-                    {" "}
-                    M
-                  </option>
+                  <option value="M"> M</option>
                   <option value="F"> F</option>
                 </select>
               </div>
@@ -768,10 +765,7 @@ const NewMember = () => {
                 <option value="">--Please choose a language--</option>
                 {/* <optgroup label="Type de membre"> */}
                 {/* <option></option> */}
-                <option value="francais" selected>
-                  {" "}
-                  francais
-                </option>
+                <option value="francais"> francais</option>
                 <option value="anglais"> anglais</option>
                 <option value="espagnol">espagnol</option>
                 <option value="creole">creole</option>
@@ -796,7 +790,6 @@ const NewMember = () => {
                   onChange={handleChange}
                   name="group_of_age"
                   value={group_of_age || ""}
-                  defaultValue={group_of_age || ""}
                   className="invalid:text-xs invalid:text-gray-200 block  w-full uppercase peer px-4 pt-4
               border-b border-slate-600 placeholder-transparente shadow-sm text-gray-900"
                 >
@@ -806,10 +799,7 @@ const NewMember = () => {
                   <option value="20-24"> 20-24</option>
                   <option value="25-29"> 25-29</option>
                   <option value="30-34"> 30-34</option>
-                  <option value="35-39" selected>
-                    {" "}
-                    35-39
-                  </option>
+                  <option value="35-39"> 35-39</option>
                   <option value="40-44"> 40-44</option>
                   <option value="45-54"> 45-54</option>
                   <option value="55+"> 55+</option>
@@ -857,9 +847,7 @@ const NewMember = () => {
               >
                 <option value="">--Please choose a language--</option>
 
-                <option value="emploi temps plein" selected>
-                  emploi a temps plein
-                </option>
+                <option value="emploi temps plein">emploi a temps plein</option>
                 <option value="emploi temps partiel">
                   emploi a temps partiel
                 </option>
@@ -1047,9 +1035,7 @@ const NewMember = () => {
               >
                 <option value="">--Please choose an option--</option>
 
-                <option value="non" selected>
-                  NON
-                </option>
+                <option value="non">NON</option>
                 <option value="oui">OUI</option>
               </select>
             </div>

@@ -118,7 +118,7 @@ const ListVolets = () => {
             .mutateAsync({ id, data })
             .then((res) => res)
             .catch((error) => console.log(error));
-          console.log(post);
+          //console.log(post);
           if (post.status === 201) toast.success("volet updated successfully");
           else {
             toast.error("volet non mis a jour " + post.data.message);

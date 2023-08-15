@@ -198,7 +198,7 @@ const UsersEdit = () => {
                     >
                       <option value="">--Please choose sex--</option>
 
-                      <option value="admin" selected>
+                      <option value="admin">
                         {" "}
                         admin
                       </option>

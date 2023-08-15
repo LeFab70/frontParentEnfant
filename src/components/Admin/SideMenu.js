@@ -183,14 +183,27 @@ const SideMenu = () => {
 
                 {/* </span> */}
                 {user.role === "admin" && (
-                  <Link
-                    to="volets/edit"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <AiOutlineSetting />
-                    <span>Settings</span>
-                  </Link>
+                  <>
+                    <Link
+                      to="volets/edit"
+                      rel="noopener noreferrer"
+                      className="flex items-center p-2 space-x-3 rounded-md"
+                    >
+                      <AiOutlineSetting />
+                      <span>Settings</span>
+                    </Link>
+
+                    {/* <li className="rounded-sm w-full">
+                      <Link
+                        to="peri/add"
+                        rel="noopener noreferrer"
+                        className=" transition ease-in-out duration-200 w-full flex items-center p-2 space-x-3 rounded-md hover:bg-sky-700 cursor-pointer"
+                      >
+                        
+                        <span>periode</span>
+                      </Link>
+                    </li> */}
+                  </>
                 )}
 
                 {/* <ul className="px-2">

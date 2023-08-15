@@ -45,7 +45,7 @@ const ListOfMember = () => {
   //console.log(dataListVolet.data);
 
   const getNameVolet = (idVolet) => {
-    console.log(idVolet);
+    // console.log(idVolet);
     if (idVolet) {
       const nameVolet =
         dataListVolet.data &&
@@ -73,26 +73,26 @@ const ListOfMember = () => {
   const columns = [
     {
       name: <span className="font-extrabold text-red-900 text-base">ID</span>,
-      selector: (row) => row.Id_member,
+      selector: (row) => (row.Id_member ? row.Id_member : null),
       width: "0%",
     },
 
     {
       name: <span className="font-extrabold text-red-900 text-xs">card</span>,
-      selector: (row) => row.card_member,
+      selector: (row) => (row.card_member ? row.card_member : null),
       width: "7%",
     },
     {
       name: (
         <span className="font-extrabold text-red-900 text-base">prenoms</span>
       ),
-      selector: (row) => row.fname,
+      selector: (row) => (row.fname ? row.fname : ""),
       sortable: true,
       width: "8%",
     },
     {
       name: <span className="font-extrabold text-red-900 text-base">noms</span>,
-      selector: (row) => row.lname,
+      selector: (row) => (row.lname ? row.lname : ""),
       sortable: true,
       width: "7%",
     },
@@ -102,7 +102,7 @@ const ListOfMember = () => {
           type de membre
         </span>
       ),
-      selector: (row) => row.type_of_member,
+      selector: (row) => (row.type_of_member ? row.type_of_family : ""),
       sortable: true,
       width: "10%",
     },
@@ -110,7 +110,7 @@ const ListOfMember = () => {
       name: (
         <span className="font-extrabold text-red-900 text-xs">Contact</span>
       ),
-      selector: (row) => row.phone_member,
+      selector: (row) => (row.phone_member ? row.phone_member : ""),
       sortable: true,
       width: "10%",
     },
@@ -121,7 +121,10 @@ const ListOfMember = () => {
         </span>
       ),
       selector: (row) => (
-        <span className="text-xs "> {row.type_of_family}</span>
+        <span className="text-xs ">
+          {" "}
+          {row.type_of_family ? row.type_of_family : ""}
+        </span>
       ),
       sortable: true,
       width: "9%",
@@ -130,7 +133,7 @@ const ListOfMember = () => {
       name: (
         <span className="font-extrabold text-red-900 text-xs">language</span>
       ),
-      selector: (row) => row.language,
+      selector: (row) => (row.language ? row.language : ""),
       sortable: true,
       width: "9%",
     },
@@ -138,7 +141,8 @@ const ListOfMember = () => {
       name: (
         <span className="font-extrabold text-red-900 text-xs">Auto.Photo?</span>
       ),
-      selector: (row) => row.autorisationPicture,
+      selector: (row) =>
+        row.autorisationPicture ? row.autorisationPicture : "",
       sortable: true,
       width: "9%",
     },
@@ -147,7 +151,9 @@ const ListOfMember = () => {
       name: <span className="font-extrabold text-red-900 text-xs">volet?</span>,
       selector: (row) =>
         //{getNameVolet(member?.Has_members[0].Id_volet)}
-        getNameVolet(row.Has_members[0]?.Id_volet) || "",
+        getNameVolet(row.Has_members[0]?.Id_volet)
+          ? getNameVolet(row.Has_members[0]?.Id_volet)
+          : "",
       sortable: true,
       width: "8%",
     },
@@ -160,7 +166,7 @@ const ListOfMember = () => {
           <button
             onClick={() => {
               setShowModal(true);
-              handleDetails(row.Id_member);
+              handleDetails(row.Id_member ? row.Id_member : 0);
             }}
             className=" text-teal-900 mx-2 font-extrabold"
           >
@@ -169,7 +175,7 @@ const ListOfMember = () => {
           </button>
           <button
             onClick={() => {
-              handleDelete(row.Id_member);
+              handleDelete(row.Id_member ? row.Id_member : 0);
             }}
             className=" text-red-900 font-extrabold"
           >
@@ -225,7 +231,7 @@ const ListOfMember = () => {
       <div className="mt-2 bg-sky-100 p-1 rounded-lg shadow-xl shadow-white w-[100%] uppercase ">
         <DataTable
           columns={columns}
-          data={volet}
+          data={volet ? volet : null}
           selectableRows
           // selectableRowsHighlight
           //highlightOnHover
